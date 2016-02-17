@@ -3,7 +3,7 @@ TEMPLATE = app
 QT += sql
 QT += widgets
 QMAKE_CXXFLAGS_RELEASE = -Os
-INCLUDEPATH += ../
+INCLUDEPATH += ../ ../HIDAPI/hidapi
 SOURCES += \
     Settings.cpp \
     MainWindow.cpp \
@@ -11,14 +11,16 @@ SOURCES += \
     DeviceData.cpp \
     Device.cpp \
     Comm.cpp \
-    ImportExportHex.cpp
+    ImportExportHex.cpp \
+    ../HIDAPI/mac/hid.c
 HEADERS += \
     Settings.h \
     MainWindow.h \
     DeviceData.h \
     Device.h \
     Comm.h \
-    ImportExportHex.h
+    ImportExportHex.h \
+    ../HIDAPI/hidapi/hidapi.h
 
 FORMS += MainWindow.ui \
     Settings.ui
@@ -30,9 +32,9 @@ OTHER_FILES += windows.rc
 # OS is being used
 #-------------------------------------------------
 win32: LIBS += -L../HIDAPI/windows
-macx: LIBS += -L../HIDAPI/mac
+#macx: LIBS += -L../HIDAPI/mac
 unix: !macx: LIBS += -L../HIDAPI/linux
-LIBS += -lHIDAPI
+#LIBS += -lHIDAPI
 
 #-------------------------------------------------
 # Make sure to add the required libraries or
